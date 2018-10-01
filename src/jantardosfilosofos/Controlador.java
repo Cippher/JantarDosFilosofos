@@ -57,7 +57,7 @@ public class Controlador
         notify();
     }
     //---Teste de contador
-    /*public int getContador(){
+    public int getContador(){
         return contador;
-    }*/
+    }
 }

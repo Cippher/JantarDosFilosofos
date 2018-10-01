@@ -7,15 +7,7 @@ package jantardosfilosofos;
 public class Iniciar
 {
 
-    // Cria padrões de comportamento dos filósofos
-    //final int PENSANDO = 0;
-    //final int FAMINTO  = 1;
-    //final int COMENDO  = 2;
-
-    // Mensagem para cada um dos estados
-    //String mensagem = "";
-
-    // Criação dos semáforos da aplicação
+    // Criação dos controladores da aplicação
 
     // O Controlador controle que recebe o valor incial 1 para o contador
     // e é o controlador principal
@@ -25,9 +17,9 @@ public class Iniciar
     // que será criado, esses semafóros não recebem valores de inicialização
     // portanto iniciando o contador em 0
     //----Alteração para testar contador e controlador
-    //----Alteração na classe filosofo onde tem semaforo
+    //----Alteração na classe filosofo onde tem controlador
     //----Printar o semaforo na classe filosofo para testar o controlador----
-    public static Controlador semaforos[] = new Controlador[5];
+    public static Controlador[] controleFilosofo = new Controlador[5];
     //----
 
     // Define um vetor para o estado de cada um dos filósofos presentes
@@ -63,11 +55,11 @@ public class Iniciar
         filosofo[4] = new Filosofo("Bardock", 4);
 
         // Inicializa todos semáforos
-        semaforos[0] = new Controlador(0);
-        semaforos[1] = new Controlador(0);
-        semaforos[2] = new Controlador(0);
-        semaforos[3] = new Controlador(0);
-        semaforos[4] = new Controlador(0);
+        controleFilosofo[0] = new Controlador(0);
+        controleFilosofo[1] = new Controlador(0);
+        controleFilosofo[2] = new Controlador(0);
+        controleFilosofo[3] = new Controlador(0);
+        controleFilosofo[4] = new Controlador(0);
 
         // Inicia a execução de todos filósofos (fazer um FOR)
         filosofo[0].start();

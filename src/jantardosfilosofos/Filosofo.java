@@ -1,5 +1,7 @@
 package jantardosfilosofos;
 
+import java.util.Random;
+
 /**
  *
  * @author 0196611 Vinícius Daniel N. B.
@@ -11,6 +13,9 @@ public class Filosofo extends Thread {
 
     // Variável para contar o número de vezes que determinado filósofo comeu
     private int ComeuNVezes = 0;
+    
+    //Random
+    private static Random random = new Random();
 
     public int getComeuNVezes() {
         return ComeuNVezes;
@@ -36,12 +41,20 @@ public class Filosofo extends Thread {
         //System.out.println("O Filósofo " + getName() + " está COM FOME!");
         //-*-*-*-
         // ------ Tentativa de forçar rodar o filosofo com maior prioridade
-        for (int i = 0; i < 5; i++) {
+        //for (int i = 0; i < 5; i++) {
             if (Iniciar.filosofo[this.ID].getPriority() == 2) {
-                Iniciar.filosofo[VizinhoEsquerda()].Pensa();
+                Iniciar.controle.contador = 1;
+                //Iniciar.filosofo[VizinhoEsquerda()].Pensa();
                 Iniciar.filosofo[VizinhoDireita()].Pensa();
+                
+                //>>>>>
+                System.out.println("------>" + Iniciar.controle.getContador());
+                
+                Iniciar.filosofo[VizinhoEsquerda()].LargarGarfo();
+                //Iniciar.filosofo[VizinhoDireita()].LargarGarfo();
+                //>>>>>>
             }
-        }
+        //}
     }
 
     // Método para definir que o filósofo está comendo
@@ -85,7 +98,8 @@ public class Filosofo extends Thread {
             //---
             //Exibe uma mensagem com o numero de vezes que o filosofo comeu atualizado
             //-*-*-*-
-            System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + " comeu " + Iniciar.filosofo[i].getComeuNVezes() + " vezes!!! ");  
+            //System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + 
+                    //" comeu " + Iniciar.filosofo[i].getComeuNVezes() + " vezes!!! ");  
             //System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + " tem prioridade " + Iniciar.filosofo[i].getPriority() + "\n");
             //-*-*-*-
         }
@@ -96,7 +110,7 @@ public class Filosofo extends Thread {
         // durante certo período de tempo
         try {
             // Fica parado neste estado por 1000 milisegundos
-            Thread.sleep(1000L);
+            Thread.sleep(random.nextInt(1000)+500);
         } catch (InterruptedException ex) {
             // Exibe uma mensagem de controle de erro
             System.out.println("ERROR>" + ex.getMessage());
@@ -107,6 +121,12 @@ public class Filosofo extends Thread {
     public void Pensa() {
         // Seta o estado deste filósofo na classe Iniciar para PENSANDO
         Iniciar.estado[this.ID] = 0;
+        
+        for(int i=0; i<5; i++){
+        System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + 
+                        " comeu " + Iniciar.filosofo[i].getComeuNVezes() + " vezes!!! ");
+        }
+        System.out.println("\n");
         // Exibe uma mensagem de controle na tela
         //-*-*-*-
         //System.out.println("O Filósofo " + getName() + " está PENSANDO!");
@@ -115,7 +135,7 @@ public class Filosofo extends Thread {
         // durante certo período de tempo
         try {
             // Fica parado neste estado por 1000 milisegundos
-            Thread.sleep(1000L);
+            Thread.sleep(random.nextInt(500)+700);
         } catch (InterruptedException ex) {
             // Exibe uma mensagem de controle de erro
             System.out.println("ERROR>" + ex.getMessage());
@@ -127,18 +147,32 @@ public class Filosofo extends Thread {
         // Decrementa o Controlador controle principal da classe, isso permite
         // informar que o atual método está operando na mesa dos filósofos
         Iniciar.controle.decrementar();
-
+        //>>>>>
+        if(Iniciar.controle.contador < 0){
+            Iniciar.controle.contador = 0;
+        }//>>>>>
+        
         // Coloca o filósofo para pensar determinado tempo
         Pensa();
-
+        //Iniciar.controle.incrementar();
         // Após o filósofo pensar, ele vai informar para os seus vizinhos
         // que podem tentar pegar os garfos que já estão disponíveis
-        Iniciar.filosofo[VizinhoEsquerda()].TentarObterGarfos();
-        Iniciar.filosofo[VizinhoDireita()].TentarObterGarfos();
-
+        //<<<<<Iniciar.filosofo[VizinhoEsquerda()].TentarObterGarfos();
+        //<<<<<Iniciar.filosofo[VizinhoDireita()].TentarObterGarfos();
+        
+        //>>>>>
+        Iniciar.filosofo[VizinhoEsquerda()].GarfoEsquerdo();
+        Iniciar.filosofo[VizinhoDireita()].GarfoEsquerdo();
+        //>>>>>
         // Após operar, volta o Controlador controle para o estado normal
         // indicando que já realizou todos procedimentos na mesa
         Iniciar.controle.incrementar();
+        
+        //Controle de contador
+        //>>>>>
+        if(Iniciar.controle.getContador() > 2){
+           Iniciar.controle.contador = 1; 
+        }//>>>>>
     }
 
     // Método para o filósofo pegar um garfo na mesa
@@ -146,25 +180,39 @@ public class Filosofo extends Thread {
         // Decrementa o Controlador controle principal da classe, isso permite
         // informar que o atual método está operando na mesa dos filósofos
         Iniciar.controle.decrementar();
-
+        //>>>>>
+        if(Iniciar.controle.contador < 0){
+           Iniciar.controle.contador = 0;
+        }//>>>>>
+        
         // Deixa o filósofo faminto por determinado tempo
         ComFome();
 
         // Após o filósofo o período de fome, ele vai verificar com seus
         // vizinhos se ele pode pegar os garfos
-        TentarObterGarfos();
+        //<<<<<TentarObterGarfos();
+        //>>>>>Chamada na versão 2 garfos
+        GarfoEsquerdo();
 
         // Após operar, volta o Controlador controle para o estado normal
         // indicando que já realizou todos procedimentos na mesa
         Iniciar.controle.incrementar();
-        // Decrementa seu semáforo
+        //>>>>>
+        if(Iniciar.controle.getContador() > 2){
+           Iniciar.controle.contador = 1; 
+        }//>>>>>
+        
+        // Decrementa seu controleFilosofo
         //----
-        Iniciar.semaforos[this.ID].decrementar();
+        //System.out.println("O Filósofo " + getName() + " SEMAFORO" + Iniciar.controleFilosofo[this.ID].getContador());
+        Iniciar.controleFilosofo[this.ID].decrementar();
+        //>>>>>Segundo "decrementar" para colocar o controleFilosofo em estado 0
+        //>>>>>Na Versão com 2 garfos, controleFilosofo 0 = sem garfo, 1 = garfo esquerdo e 2 = garfo esquerdo e direito
+        Iniciar.controleFilosofo[this.ID].decrementar();
     }
 
     // Método para verificar se o filósofo pode pegar um garfo disposto na mesa
-    public void TentarObterGarfos() {
-
+    /*<<<<<public void TentarObterGarfos() {
         // Verifica se este filósofo está com fome, e se o vizinho da esquerda
         // e da direita não estão comendo
         if (Iniciar.estado[this.ID] == 1
@@ -172,13 +220,43 @@ public class Filosofo extends Thread {
                 && Iniciar.estado[VizinhoDireita()] != 2) {
             // Então este filósofo pode comer
             Come();
-            // E incrementa o seu semáforo
-            //----
-            Iniciar.semaforos[this.ID].incrementar();
+            // E incrementa o seu controleFilosofo
+            Iniciar.controleFilosofo[this.ID].incrementar();
         }
-
+    }*///<<<<<
+    
+    
+    //>>>>>
+    
+    public void GarfoEsquerdo(){
+    
+        if(Iniciar.estado[this.ID] == 1 && Iniciar.estado[VizinhoEsquerda()] != 2 
+                && Iniciar.controleFilosofo[VizinhoEsquerda()].getContador() != 2){
+            
+            Iniciar.controleFilosofo[this.ID].incrementar();
+            
+            GarfoDireito();
+            
+        }
     }
-
+    
+    //>>>>>
+    public void GarfoDireito(){
+        if(Iniciar.estado[this.ID] == 1 && Iniciar.estado[VizinhoDireita()] != 2 
+                && Iniciar.controleFilosofo[VizinhoDireita()].getContador() ==0){
+            
+            Iniciar.controleFilosofo[this.ID].incrementar();
+    
+            Come();
+            
+            //Foi trocado para cima
+            //Iniciar.controleFilosofo[this.ID].incrementar();
+        }else{
+            Iniciar.controleFilosofo[this.ID].decrementar();
+            }
+    }
+    //>>>>>
+    
     // Método de execução da classe, onde o ambiente do filósofo será rodado
     @Override
     public void run() {
@@ -192,7 +270,7 @@ public class Filosofo extends Thread {
             // ele descansa um pouco, e por fim, ele largar os garfos que ele pegou
             do {
                 PegarGarfo();
-                Thread.sleep(1000L);
+                Thread.sleep(random.nextInt(500)+1500);
                 LargarGarfo();
             } while (true);
         } catch (InterruptedException ex) {
