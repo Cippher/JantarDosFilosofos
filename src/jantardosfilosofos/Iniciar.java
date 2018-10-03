@@ -1,5 +1,7 @@
 package jantardosfilosofos;
 
+//Create by: Vinícius Daniel Neuenfeldt Barros
+
 public class Iniciar
 {
     public static Controlador controle = new Controlador(1);

@@ -1,5 +1,7 @@
 package jantardosfilosofos;
 
+//Create by: Vinícius Daniel Neuenfeldt Barros
+
 public class Controlador
 {
     protected int contador;

@@ -1,6 +1,7 @@
 package jantardosfilosofos;
-
 import java.util.Random;
+
+//Create by: Vinícius Daniel Neuenfeldt Barros
 
 public class Filosofo extends Thread {
 
