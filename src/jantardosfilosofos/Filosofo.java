@@ -128,6 +128,7 @@ public class Filosofo extends Thread {
         Iniciar.controleFilosofo[this.ID].decrementar();
     }
     
+    //Tenta pegar o garfo esquerdo
     public synchronized void GarfoEsquerdo(){
     
         if(Iniciar.estado[this.ID] == 1 && Iniciar.estado[VizinhoEsquerda()] != 2 
@@ -140,7 +141,8 @@ public class Filosofo extends Thread {
             
         }   
     }
-
+    
+    // Após pegar o garfo esquerdo, tenta pegar o garfo direito
     public synchronized void GarfoDireito(){
         if(Iniciar.estado[this.ID] == 1 && Iniciar.estado[VizinhoDireita()] != 2 
                 && Iniciar.controleFilosofo[VizinhoDireita()].getContador() ==0){
@@ -188,6 +190,7 @@ public class Filosofo extends Thread {
         }
     }
  
+    //Função para imprimir a quantidade de vezes que o filósofo comeu e seu estado.
     public void Imprime(){
         for(int i=0; i<5; i++){
             System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + 
