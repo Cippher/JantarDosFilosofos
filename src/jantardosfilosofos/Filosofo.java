@@ -25,7 +25,7 @@ public class Filosofo extends Thread {
     }
 
     // Método para definir que o filósofo está com fome
-    public void ComFome() {
+            public void ComFome() {
         // COM_FOME
         Iniciar.estado[this.ID] = 1;
     }
