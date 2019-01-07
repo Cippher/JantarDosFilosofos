@@ -36,26 +36,5 @@ public class Iniciar
            controleFilosofo[i] = new Controlador(i); 
            filosofo[i].start();
         }
-
-        /*
-        filosofo[0] = new Filosofo("Filósofo 0", 0);
-        filosofo[1] = new Filosofo("Filósofo 1", 1);
-        filosofo[2] = new Filosofo("Filósofo 2", 2);
-        filosofo[3] = new Filosofo("Filósofo 3", 3);
-        filosofo[4] = new Filosofo("Filósofo 4", 4);
-
-        
-        controleFilosofo[0] = new Controlador(0);
-        controleFilosofo[1] = new Controlador(0);
-        controleFilosofo[2] = new Controlador(0);
-        controleFilosofo[3] = new Controlador(0);
-        controleFilosofo[4] = new Controlador(0);
-
-        filosofo[0].start();
-        filosofo[1].start();
-        filosofo[2].start();
-        filosofo[3].start();
-        filosofo[4].start();
-        */
     }
 }

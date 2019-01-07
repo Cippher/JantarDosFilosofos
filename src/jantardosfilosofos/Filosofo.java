@@ -42,13 +42,13 @@ public class Filosofo extends Thread {
             // Compara o número de vezes que os filósofo U, V, X, Y e Z comeram e atualiza a prioridade deles
             for (int j = i + 1; j < 5; j++) {
                 if (Iniciar.filosofo[i].getComeuNVezes() - Iniciar.filosofo[j].getComeuNVezes() >= 2) {
-                    Iniciar.filosofo[i].setPriority(1);
-                    Iniciar.filosofo[j].setPriority(2);
+                    Iniciar.filosofo[i].setPriority(1);//Iniciar.filosofo[i].Pensa();
+                    Iniciar.filosofo[j].setPriority(2);//Iniciar.filosofo[i].Come();
                     System.out.println("----> O Filósofo " + Iniciar.filosofo[j].getName() + " tem prioridade " + Iniciar.filosofo[j].getPriority() + "\n");
                 } else {
                     if (Iniciar.filosofo[j].getComeuNVezes() - Iniciar.filosofo[i].getComeuNVezes() >= 2) {
-                        Iniciar.filosofo[j].setPriority(1);
-                        Iniciar.filosofo[i].setPriority(2);
+                        Iniciar.filosofo[j].setPriority(1);//Iniciar.filosofo[i].Pensa;
+                        Iniciar.filosofo[i].setPriority(2);//Iniciar.filosofo[i].Come;
                         System.out.println("----> O Filósofo " + Iniciar.filosofo[i].getName() + " tem prioridade " + Iniciar.filosofo[i].getPriority() + "\n");
                     } else {
                         if (Iniciar.filosofo[i].getComeuNVezes() - Iniciar.filosofo[j].getComeuNVezes() < 2 && Iniciar.filosofo[j].getComeuNVezes() - Iniciar.filosofo[i].getComeuNVezes() < 2) {
